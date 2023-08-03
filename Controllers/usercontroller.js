@@ -351,7 +351,7 @@ const resubmitPassword = async (req, res,next) => {
     try {
         const session = req.session.user_id;
         const userData = await User.findById({ _id: req.session.user_id,session});
-        res.render("userprofile", { user:userData, session });
+        res.render("userProfile", { user:userData, session });
     } catch (error) {
         console.log(error.message);
     }
