@@ -334,7 +334,7 @@ const resubmitPassword = async (req, res,next) => {
             );
         }
         console.log(checkWishlist);
-        res.render('singleproduct',{
+        res.render('singleProduct',{
             session,
             user:userData,
             product:productData,
