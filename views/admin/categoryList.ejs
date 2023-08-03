@@ -1,0 +1,123 @@
+
+<%- include("../adminLayouts/adminHeader.ejs") %>
+<%- include("../adminLayouts/adminSidebar.ejs") %>
+<%- include("../adminLayouts/adminNavbar.ejs") %>
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">CATEGORY LIST</h4>
+        <div class="table-responsive">
+          <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo">Add Category</button>   
+          <br>
+          <table class="table table">
+
+           
+            <thead>
+              <tr>
+                <th> No </th>
+                <th> Name </th>
+                <th> Action </th>
+              </tr>
+            </thead>                                  
+            <tbody>
+              <tr>
+                <% 
+                  if(category.length>0){
+                        for(let i=0; i<category.length; i++){
+                            %>
+                            <tr>
+                                <td> <%= i+1 %></td>
+                                <td><%= category[i].categoryName %></td>
+                                <td>
+                                   <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal-<%= category[i].categoryName %>">EDIT</a>
+                                 <a class="btn btn-danger" href="/admin/deleteCategory?id=<%= category[i]._id %>" onclick="return confirm(`Are you sure you want to delete <%= category[i].categoryName %>?`)">Delete</a></td>
+                            </tr>
+
+  <div class="modal fade" id="editModal-<%= category[i].categoryName %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">EDIT CATEGORY</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/editcategory" method="post">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Category Name</label>
+              <input type="text" class="form-control" id="recipient-name" name="name" value="<%= category[i].categoryName %>">
+              <input type="hidden" class="form-control" id="recipient-name" name="id" value="<%= category[i]._id %>">
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Category</button>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+                    <%}
+                        }else{%>
+                     <tr>
+                         <td colspan="5">user not found</td>
+                    </tr>
+                                
+                <%}%>
+              </tr>
+              <tr> 
+                <td></td>
+                <td>  </td>
+                <td>  </td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category inserting modal section -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/insert-category" method="post">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Category Name</label>
+              <input type="text" class="form-control" id="recipient-name" name="name">
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Category</button>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Category editing modal section -->
+
+
+  
+  
+<%- include("../adminLayouts/adminFooter.ejs")  %>

@@ -1,0 +1,229 @@
+<%- include("../userLayouts/userHeader.ejs")  %>
+<%- include("../userLayouts/userNavbar.ejs")  %>
+
+
+
+
+
+
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                  
+
+                    
+                </div><!-- End .container -->
+            </div><!-- End .header-top -->
+
+            <div class="header-middle sticky-header">
+                <div class="container">
+                 
+
+                    
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"></li>
+                    </ol>
+
+                    <nav class="product-pager ml-auto" aria-label="Product">
+                        <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
+                            <i class="icon-angle-left"></i>
+                            <span>Prev</span>
+                        </a>
+
+                        <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
+                            <span>Next</span>
+                            <i class="icon-angle-right"></i>
+                        </a>
+                    </nav><!-- End .pager-nav -->
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    <div class="product-details-top">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-gallery product-gallery-vertical">
+                                    <div class="row">
+                                        <figure class="product-main-image">
+                                            <img id="product-zoom" src="/adminAssets/adminImage/<%=product.productImage[0] %>" data-zoom-image="/adminAssets/adminImage/<%=product.productImage[0] %>" alt="">
+
+                                            <a href="/adminAssets/adminImage/<%=product.productImage[0] %>" id="btn-product-gallery" class="btn-product-gallery">
+                                                <i class="icon-arrows"></i>
+                                            </a>
+                                        </figure><!-- End .product-main-image -->
+
+                                        <div id="product-zoom-gallery" class="product-image-gallery">
+                                            <a class="product-gallery-item active" href="#" data-image="/adminAssets/adminImage/<%=product.productImage[0] %>" data-zoom-image="/adminAssets/adminImage/<%=product.productImage[0] %>">
+                                                <img src="/adminAssets/adminImage/<%=product.productImage[0] %>" alt="product side">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/userassets/images/products/single/2.jpg" data-zoom-image="/adminAssets/adminImage/<%=product.productImage[0] %>">
+                                                <img src="/adminAssets/adminImage/<%=product.productImage[0] %>" alt="product cross">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/userassets/images/products/single/3.jpg" data-zoom-image="/adminAssets/adminImage/<%=product.productImage[0] %>">
+                                                <img src="/adminAssets/adminImage/<%=product.productImage[0] %>" alt="product with model">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/userassets/images/products/single/4.jpg" data-zoom-image="/adminAssets/adminImage/<%=product.productImage[0] %>">
+                                                <img src="/adminAssets/adminImage/<%=product.productImage[0] %>" alt="product back">
+                                            </a>
+                                        </div><!-- End .product-image-gallery -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .product-gallery -->
+                            </div><!-- End .col-md-6 -->
+
+                            <div class="col-md-6">
+                                <div class="product-details">
+                                    <h1 class="product-title"><%= product.productName %></h1><!-- End .product-title -->
+
+                                  
+                                    <div class="product-price">
+                                        <%	if(product.offPrice > 0){ %>
+                                            <del class="text-danger">₹ <%= product.productPrice %>.00</del> &nbsp; &nbsp; ₹ <%= product.offPrice%>.00
+                                            <% }else{ %>
+                                            ₹ <%=product.productPrice%>.00
+                                            <%	} %>
+                                    </div><!-- End .product-price -->
+                                    
+                                    <div class="product-content">
+                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                                    </div><!-- End .product-content -->
+
+
+
+                                
+
+                                    <div class="product-details-action">
+                                        <button onclick="addtocart('<%=product._id%>')" class="btn-product btn-cart">Add to Cart</button>
+                                   
+                                    
+
+                                        <div class="details-action-wrapper">
+                                            <% if(wishlist === -1){ %>
+                                                
+                                               <a onclick="addWishlist('<%=product._id%>')"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                                  </svg></a> 
+                                    
+                                            <% }else{ %>
+                                                <a href="/deleteSingleWishlist/<%=product._id%>"><svg xmlns="http://www.w3.org/2000/svg"  width="25" height="25" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                  </svg></a>
+                                           
+                                            <%}%>
+
+                                        </div><!-- End .details-action-wrapper -->
+                                    </div><!-- End .product-details-action -->
+                                </div>  
+                                    <div class="product-details-footer">
+                                        <div class="product-cat">
+                                            <span>Category:</span>
+                                            <a href="#">Women</a>,
+                                            <a href="#">Dresses</a>,
+                                            <a href="#">Yellow</a>
+                                        </div><!-- End .product-cat -->
+<!-- 
+                                        <div class="social-icons social-icons-sm">
+                                            <span class="social-label">Share:</span>
+                                            <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                            <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                            <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                            <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                        </div> -->
+                                    </div><!-- End .product-details-footer -->
+                                </div><!-- End .product-details -->
+                            </div><!-- End .col-md-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+
+                    <div class="product-details-tab">
+                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                            </li>
+                           
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                                <div class="product-desc-content">
+                                    <h3>Product Information</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
+                                    <ul>
+                                        <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
+                                        <li>Vivamus finibus vel mauris ut vehicula.</li>
+                                        <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
+                                    </ul>
+
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                        
+                           
+
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .product-details-tab -->
+
+                 
+                    
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+        <!------------------ AJAX ----------------->
+        <script>
+            function addtocart(productid) {
+                $.ajax({
+                    url: "/addtocart",
+                    method: "post",
+                    data: {
+                        id: productid
+                    },
+                    success: (response) => {
+                        if (response.success) {
+                            swal.fire({
+                                positon: 'center',
+                                icon: "success",
+                                title: 'product added to cart',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            })
+                        }else {
+                        swal.fire({ 
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.message
+                        });
+                    } 
+                    }
+                })
+            }
+
+            function addWishlist(id){               
+               $.ajax({
+              
+                url:'/addtoWishlist',
+                method:'post',              
+                data: {
+                        proId:id
+                    },
+                    success: (response) => {
+                        location.reload()
+                        } 
+               })
+            }
+            </script>
+ <%- include("../userLayouts/userFooter.ejs")  %>

@@ -1,0 +1,61 @@
+
+<%- include("../adminLayouts/adminHeader.ejs") %>
+<%- include("../adminLayouts/adminSidebar.ejs") %>
+<%- include("../adminLayouts/adminNavbar.ejs") %>
+
+        <!----------------USER LIST ----------------->
+    
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">USER LIST</h4>
+        <div class="table-responsive">
+          <table class="table table">
+              <tr>
+                <th>NO:</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% 
+                    if(user.length>0){
+                        for(let i=0; i<user.length; i++){
+                            %>
+                            <tr>
+                                <td> <%= i+1 %></td>
+                                <td><%= user[i].name %></td>
+                                <td><%= user[i].contact%> </td>
+                                <td><%= user[i].email%> </td>
+                                <td><% if(user[i].is_block=== true){%>
+                                  <a class="btn btn-success" href="/admin/unblock?id=<%= user[i]._id%>">unblock</a>
+                                <%}
+                                else{%>
+                                  <a class="btn btn-danger" href="/admin/block?id=<%= user[i]._id%>" onclick="return confirm(`Are you sure you need to block <%= user[i].name %>?`)">block</a>
+                               <% } %>
+    
+                           </td>
+                     </tr>
+                    <%}
+                        }else{%>
+                     <tr>
+                         <td colspan="5">user not found</td>
+                    </tr>
+                                
+                <%}%>
+              </tr>
+              <tr> 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include("../adminLayouts/adminFooter.ejs")  %>

@@ -1,0 +1,61 @@
+
+<%- include('../userLayouts/userHeader.ejs')  %>
+<%- include('../userLayouts/userNavbar.ejs') %>
+
+ 
+
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="billing_details" >
+            <div class="row">
+                <div class="col-lg-12" >
+                    <h3 class="pt-5
+                    ">Edit Address</h3>
+                    <form class="row contact_form"  action=""
+                        method="post">
+                        <div class="col-md-12 form-group">
+                            <label>UserName</label><br>
+                            <input type="text" class="" value="<%= address.userName %>" name="username"
+                                required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Mobile</label><br>
+                            <input type="text" value="<%= address.mobile%>" name="mobile" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>AlternativeMob</label><br>
+                            <input type="text" value="<%= address.alternativeMob %>" name="alternativeMob" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Housename</label><br>
+                            <input type="text" value="<%= address.housename %>" name="housename" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>City</label><br>
+                            <input type="text" value="<%= address.city %>" name="city" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>State</label><br>
+                            <input type="text" value="<%= address.state %>" name="state" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>Pincode</label><br>
+                            <input type="text" value="<%= address.pincode %>" name="pincode" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label>landmark</label><br>
+                            <input type="text" value="<%= address.landmark %>" name="landmark" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<%- include("../userLayouts/userFooter.ejs") %>

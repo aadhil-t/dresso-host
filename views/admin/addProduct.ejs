@@ -1,0 +1,86 @@
+
+<%- include("../adminLayouts/adminHeader.ejs") %>
+<%- include("../adminLayouts/adminSidebar.ejs") %>
+<%- include("../adminLayouts/adminNavbar.ejs") %>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Inverse table</h4>
+        <p class="card-description"> Add class <code>.table-dark</code>
+        </p>
+        <div class="table-responsive">
+          <a href="/admin/ProductList" ><button>CANCEL</button></a>
+        <table class="table table-dark">  
+        <br>
+            <form action="" method="post" enctype="multipart/form-data">
+            <br><div class="form-group">
+              <label for="exampleInputUsername1">productName</label>
+              <input type="text" name="productName" class="form-control"
+                  id="exampleInputUsername1" required>
+          </div>
+
+      <!--------------BRAND SECTION--------------->
+          <div class="form-group">
+              <label for="exampleInputUsername1">brand</label>
+              <select name="brand" class="form-control" id="exampleInputUsername1"
+                  required>
+                  <option>Puma</option>
+                  <option>Nike</option>
+                  <option>Nivia</option>
+                  <option>Adidas</option>
+              </select>
+          </div>
+
+      <!--------------CATEGORY SECTION--------------->
+          <div class="form-group">
+            <label for="category">category</label>
+            <select name="category" class="form-control" >
+                <% for(let i=0;i< category.length;i++){ %>
+                    <option value="<%= category[i].categoryName %>">
+                        <%= category[i].categoryName %>
+                    </option>
+                    <% } %>
+            </select>
+        </div>
+
+
+      <!--------------IMAGE SECTION--------------->
+      <label> File uplaod</label>
+      <div class="form-group">
+        
+          <input class="bt"
+              style="height: 28px; width: 228px; background-color: gray;color: white;"
+              accept="image/*" type="file" name="image" multiple>
+      </div>
+
+      <!--------------STOCK SECTION--------------->
+            <div class="form-group">
+              <label for="stock">Stock</label>
+              <input type="number" name="stock" class="form-control" id="stock" required>
+            </div>
+
+     <!--------------PRICE SECTION---------------> 
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" name="price" class="form-control" id="price" required>
+            </div>
+
+
+    <!--------------DESCRIPTION SECTION---------------> 
+            <div class="form-group">
+              <label for="price">Discription</label>
+              <input type="text" name="discription" class="form-control" required>
+            </div>
+
+     <!--------------BUTTON SECTION---------------> 
+            <button type="submit" value="">SUBMIT</button>
+           
+          </table>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<%- include("../adminLayouts/adminFooter.ejs")  %>

@@ -1,0 +1,117 @@
+
+<%- include("../adminLayouts/adminHeader.ejs") %>
+<%- include("../adminLayouts/adminSidebar.ejs") %>
+<%- include("../adminLayouts/adminNavbar.ejs") %>
+<div class="main-panel">
+<div class="content-wrapper">
+  <div class="row">
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+            <a  href="/admin/addProduct" ><button class="btn btn-success " >Add Product</button></a>
+          <table class="table table-dark">
+           <thead>
+              <tr>
+                <th> No</th>
+                <th>PRODUCT IMAGE </th>
+                <th> PRODUT NAME</th>
+                <th>PRICE</th>
+                <th>BRAND</th>
+                <th>CATEGORY</th>
+                <th>STOCK</th>
+                <th>ACTION</th>
+               
+              </tr>  
+            </thead>
+
+              <tbody>
+                <% if(product.length>0){
+                  for(let i=0; i<product.length; i++){%>
+                    <tr>
+                      <td>
+                        <%=i+1 %>
+                      </td>
+                      <td>
+                        <% for(let j=0; j<1; j++){%>
+                          <img style="width: 50px;height: 50px;border-radius:0px;"  
+                          src="/adminAssets/adminImage/<%= product[i].productImage[j]%>" alt="No image">
+                        <% } %>
+                      </td>
+                      <td>
+                          <%= product[i].productName %>
+                      </td>      
+                      <td>
+                        <% if(product[i].offPrice > 0 ){ %>
+                        <del class="text-danger"><%= product[i].productPrice %>   </del><span><%= product[i].offPrice %></span>
+                        <% }else{ %>
+                        <%= product[i].productPrice %>
+                        <% }%>
+                      </td>
+                      <td>
+                        <%= product[i].productBrand %>
+                      </td>
+                      <td>
+                        <%= product[i].category %>
+                      </td>
+                      <td>
+                        <%= product[i].productStock %>
+                      </td> 
+                      <td>        
+                        <a type="button" class="btn btn-success" href="/admin/editproduct/<%= product[i]._id %>">Edit</a>
+                        <a class="btn btn-dark" href="/admin/deleteProduct?id=<%= product[i]._id %>" onclick="return confirm('Are you sure you want to Delete <%= product[i].productName %>?')">Delete</a>
+                        <button type="button" class="btn btn-outline-primary my-2" data-bs-toggle="modal" data-bs-target="#addOfferModal-<%= product[i]._id %>">ADD OFFER</button> 
+                      </td>
+                        </tr>
+
+
+                        <div class="modal fade" id="addOfferModal-<%= product[i]._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ADD OFFER</h5>
+                        
+                      </div>
+                      <div class="modal-body">
+                          <form action="/admin/addOffer" method="post" class="forms-sample">
+                              <div class="form-group">
+                                <label for="exampleInputUsername1">Offer Name</label>
+                                <input type="text" class="form-control"  placeholder="Coupon Name" name="offName">
+                              
+                              </div>
+                             
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Discount Percentage</label>
+                                <input type="text" class="form-control"  placeholder="Discount Percentage" name="offPercentage">
+                              </div>
+                              <div class="form-group">
+                                
+                                <input type="hidden" class="form-control"  value="<%= product[i]._id %>" name="id">
+                              </div>
+
+                              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                              
+                              <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                            </form>
+                      </div>
+
+        </div>
+      </div>
+    </div>
+                  <%}}
+                  else{%>
+                  <tr>
+                     <td colspan="5">Users not found</td>
+                      </tr>
+                    <% } %>
+             </tbody>
+          </table>
+
+          
+      
+  </div>
+</div>
+</div>
+</div>
+
+<%- include("../adminLayouts/adminFooter.ejs")  %>

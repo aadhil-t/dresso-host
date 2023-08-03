@@ -1,0 +1,4 @@
+{
+    "livePreview.defaultPreviewPath": "/views/user/home.ejs",
+    "liveServer.settings.port": 5501
+}

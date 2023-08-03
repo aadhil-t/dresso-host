@@ -1,0 +1,453 @@
+<%- include("../userLayouts/userHeader.ejs")  %>
+<%- include("../userLayouts/userNavbar.ejs")  %>
+
+<style>
+  body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #fff;
+    background-repeat: no-repeat;
+}
+
+.modal-lg {
+  max-width: 100%;
+}
+
+/* Increase modal size for medium screens */
+@media screen and (max-width: 1200px) {
+  .modal-lg {
+    max-width: 90%;
+  }
+}
+
+/* Increase modal size for small screens */
+@media screen and (max-width: 768px) {
+  .modal-lg {
+    max-width: 95%;
+  }
+}
+
+.card {
+    z-index: 0;
+    background-color: #ECEFF1;
+    padding-bottom: 20px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    border-radius: 10px;
+}
+
+.top {
+    padding-top: 40px;
+    padding-left: 13% !important;
+    padding-right: 13% !important;
+}
+
+/*Icon progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #455A64;
+    padding-left: 0px;
+    margin-top: 30px;
+} 
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+}
+
+#progressbar .step0:before {
+    font-family: FontAwesome;
+    content: "\f10c";
+    color: #fff;
+}
+
+#progressbar li:before {
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    background: #C5CAE9;
+    border-radius: 50%;
+    margin: auto;
+    padding: 0px;
+}
+
+/*ProgressBar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 12px;
+    background: #C5CAE9;
+    position: absolute;
+    left: 0;
+    top: 16px;
+    z-index: -1;
+}
+
+#progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: -50%;
+}
+
+#progressbar li:nth-child(2):after, #progressbar li:nth-child(3):after {
+    left: -50%;
+}
+
+#progressbar li:first-child:after {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    left: 50%;
+}
+
+#progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#progressbar li:first-child:after {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/*Color number of the step and the connector before it*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #651FFF;
+}
+
+#progressbar li.active:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
+
+.icon-content { 
+    padding-bottom: 20px;
+}
+
+/* Custom CSS for modal-dialog and modal-content */
+.modal-dialog {
+  max-width: 800px; /* Adjust the width as needed */
+}
+
+.modal-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Center the container within the modal-body */
+.modal-bod {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .top {
+      padding-left: 5% !important;
+      padding-right: 5% !important;
+    }
+
+    .icon-content {
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-bod {
+      justify-content: center;
+    }
+</style>
+
+
+
+<div class="page-wrapper">
+	
+  <main class="main">
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+ <div id="reloadDiv">
+    
+
+ 
+    <section class="ec-page-content ec-vendor-uploads ec-user-account pb-5">
+        <div class="col-lg-12 d-flex justify-content-center">                  
+             <div class="col-12" >
+                 <h3 class="mt-2">Order Details</h3>
+                 <p>
+               
+                  <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    VIEW DETAILS
+                  </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                  <div >
+                    <span>Order Date :</span><span class="font-weight-bold" > <%= orders.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g,'-') %> </span><br>
+                    <span>Total Amount : <span class="font-weight-bold"> <%= orders.totalAmount %> </span></span><br>
+                    <span>Payment Method :<span class="font-weight-bold"><%= orders.paymentMethod %> </span></span><br>
+                    <span> Order Id:</span><span class="font-weight-bold"> <%= orders._id %></span></span><br>
+                    <span>Address :</span><span class="font-weight-bold"><%= orders.deliveryAddress %></span><br>
+                    <!-- <a href="/invoiceDownload/<%= orders._id %>" type="button" class="btn btn-outline-primary my-3">Download invoice</a> -->                   
+                  </div>
+                </div>
+
+
+             </div>
+        </div>
+        
+        <div class="container p-1">
+                <div class="ec-shop-rightside col-lg-12 col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity</th>
+                               
+                                <th scope="col">Total Price</th> 
+                                <th scope="col">Status</th> 
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(orders.products.length > 0){
+                            orders.products.forEach((order) => { %>
+                             <tr>   
+                            <td>
+                                <img width="50px" height="50px" src="/adminAssets/adminImage/<%= order.productid.productImage[0] %>" alt="">
+                                <%= order.productid.productName %> 
+                            </td>
+                            <td><%= order.count %></td>
+                          
+                            <td><%= order.productPrice %></td>
+                            <td><%= order.status %></td>
+                            <td>
+                               <% if(order.status == 'canceled' ) {%> 
+                                     <p class="text-danger">canceled</p>
+                                <% }else if (order.status == 'Delivered'){ %>
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#returnModal-<%= order._id %>" >Return</button>
+                                    <% }else if (order.status == 'Product Returned'){ %>
+                                        <p class="text-success">Product Returned</p>
+                                 <%  }else if( order.status == 'out for delivery'){%> 
+                                    <% }else{ %>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= order._id %>" > Cancel </button>                          
+                               <% } %>  
+                               <% if(order.status != 'canceled' && order.status != 'Product Returned') {%>     
+                               <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Order Tracking</a>
+                               <% } %>
+                        
+                           </td>
+                                                  <!-- Modal for cancel Order -->
+
+<div class="modal fade" id="exampleModal-<%= order._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/cancelOrder" method="post">
+            <input type="hidden" value="<%= order._id %>" name="orderid">
+            <input type="hidden" value="<%= orders._id %>" name="ordersid">
+           
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are You Sure</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+           <p class="mx-5 mt-2 "> <input type="radio" value="Loss of interest"  name="reason" required> <span class="font-weight-bold">  Loss of interest </span></p>
+           <p class="mx-5"> <input type="radio" value="Unexpected Shipping costs" name="reason" required> <span class="font-weight-bold">  Unexpected Shipping costs  </span></p>
+           <p class="mx-5 mb-2"> <input type="radio" value="other" name="reason" required><span class="font-weight-bold">  other  </span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="submit" class="btn btn-primary"  >Yes</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+                                                    <!-- Modal for Return -->
+
+<div class="modal fade" id="returnModal-<%= order._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/returnOrder" method="post">
+            <input type="hidden" value="<%= order._id %>" name="orderid">
+            <input type="hidden" value="<%= orders._id %>" name="ordersid">
+           
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are You Sure</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center ">
+            
+          <input type="text" class="form-control mt-2" placeholder="type your reason here"  name="reason" style="width: 550px;" required>
+           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="submit" class="btn btn-primary"  >Yes</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+
+  <!-- Modal for order tracking -->
+  <div class="modal fade modal-lg" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-titl" id="exampleModalToggleLabel">Order Tracking</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-bod">
+        <div class="container px-1 px-md-4 py-5 mx-auto">
+    <div class="card">
+        <div class="row d-flex justify-content-between px-3 top">
+            <div class="d-flex">
+                <h5>ORDER <span class="text-primary font-weight-bold">#<%= order._id %></span></h5>
+            </div>
+           
+        </div>
+        <!-- Add class 'active' to progress -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+            <ul id="progressbar" class="text-center">
+              <% if( order.status == 'out for delivery'){%> 
+                <li class="active step0"></li>
+                <li class="active step0"></li>
+                <li class="active step0"></li>
+                <li class="step0"></li>
+                <% } else if( order.status == 'placed'){%> 
+                  <li class="active step0"></li>
+                <li class="step0"></li>
+                <li class="step0"></li>
+                <li class="step0"></li>
+                <% } else if( order.status == 'shiped'){%> 
+                  <li class="active step0"></li>
+                <li class="active step0"></li>
+                <li class="step0"></li>
+                <li class="step0"></li>
+                <% } else { %>
+                  <li class="active step0"></li>
+                <li class="active step0"></li>
+                <li class="active step0"></li>
+                <li class="active step0"></li>
+                <% } %>
+
+            </ul>
+            </div>
+        </div>
+        <div class="row justify-content-between top">
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Placed</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Shipped</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/TkPm63y.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Out for <br>Delivery</p>
+                </div>
+            </div>
+            <div class="row d-flex icon-content">
+                <img class="icon" src="https://i.imgur.com/HdsziHP.png">
+                <div class="d-flex flex-column">
+                    <p class="font-weight-bold">Order<br>Arrived</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+   
+  </div>
+</div>
+</div>
+
+</tr>
+
+                         <%   }) }%>
+                        </tbody>
+                        
+                          
+                    </table>
+
+
+
+
+                </div>
+        </div>
+
+
+    </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    <!-- End User profile section -->
+
+  <!-- <script>
+    function cancelOrder(order) {
+Swal.fire({
+    title: 'Are you sure?',
+    text: "You want to cancel the order!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete!'
+}).then((result) => {
+    if (result.isConfirmed) {
+        $.ajax({
+            url: "/cancelOrder",
+            data: {
+                id: order
+            },
+            method: 'post',
+            success: (response) => {
+                location.reload();
+            },
+            error: (error) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while deleting the item.',
+                    icon: 'error',
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+});
+}
+
+
+  </script> -->
+  <%- include("../userLayouts/userFooter.ejs")  %>

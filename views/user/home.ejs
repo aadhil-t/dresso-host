@@ -1,0 +1,103 @@
+<%- include("../userLayouts/userHeader.ejs")  %>
+<%- include("../userLayouts/userNavbar.ejs")  %>
+
+<main class="main">
+    <div class="intro-slider-container">
+        <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{
+                "dots": false,
+                "nav": false, 
+                "responsive": {
+                    "992": {
+                        "nav": true
+                    }
+                }
+            }'>
+
+            <% if(banners.length > 0){
+                banners.forEach((banner)=>{
+                    %>
+            
+
+            <div class="intro-slide" style="background-image: url(/adminAssets/adminImage/<%= banner.image %>);">
+                <div class="container intro-content text-center">
+                    <h3 class="intro-subtitle text-white">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
+                    <h1 class="intro-title text-white"><%= banner.heading %></h1><!-- End .intro-title -->
+
+                    <a href="/shopPage" class="btn btn-outline-white-4">
+                        <span>Discover More</span>
+                    </a>
+                </div><!-- End .intro-content -->
+            </div><!-- End .intro-slide -->
+            <%     })
+            } %>
+
+            
+        </div><!-- End .intro-slider owl-carousel owl-theme -->
+
+        <span class="slider-loader"></span><!-- End .slider-loader -->
+    </div><!-- End .intro-slider-container -->
+
+    
+    <div class="pt-2 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="banner banner-overlay">
+                        <a href="#">
+                            <img src="/userAssets/images/demos/demo-6/banners/banner-1.jpg" alt="Banner">
+                        </a>
+
+                        <div class="banner-content banner-content-center">
+                            <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4><!-- End .banner-subtitle -->
+                            <h3 class="banner-title text-white"><a href="#"><strong>Women’s</strong></h3><!-- End .banner-title -->
+                            <a href="/shopPage" class="btn btn-outline-white banner-link underline">Shop Now</a>
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+                </div><!-- End .col-sm-6 -->
+
+                <div class="col-sm-6">
+                    <div class="banner banner-overlay">
+                        <a href="#">
+                            <img src="/userAssets/images/demos/demo-6/banners/banner-2.jpg" alt="Banner">
+                        </a>
+
+                        <div class="banner-content banner-content-center">
+                            <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4><!-- End .banner-subtitle -->
+                            <h3 class="banner-title text-white"><a href="#"><strong>Men’s</strong></a></h3><!-- End .banner-title -->
+                            <a href="/shopPage" class="btn btn-outline-white banner-link underline">Shop Now</a>
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+                </div><!-- End .col-sm-6 -->
+            </div><!-- End .row -->
+            <hr class="mt-0 mb-0">
+        </div><!-- End .container -->
+    </div><!-- End .bg-gray -->
+
+    <div class="mb-5"></div><!-- End .mb-5 -->
+    <div class="container">
+        <div class="heading heading-center mb-3">
+            <h2 class="title">Trending</h2><!-- End .title -->
+
+            <ul class="nav nav-pills justify-content-center" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="trending-all-link" data-toggle="tab" href="#trending-all-tab" role="tab" aria-controls="trending-all-tab" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trending-women-link" data-toggle="tab" href="#trending-women-tab" role="tab" aria-controls="trending-women-tab" aria-selected="false">Women</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trending-men-link" data-toggle="tab" href="#trending-men-tab" role="tab" aria-controls="trending-men-tab" aria-selected="false">Men</a>
+                </li>
+            </ul>
+        </div><!-- End .heading -->
+
+      
+        </div><!-- End .container -->
+    </div><!-- End .blog-posts -->
+</main><!-- End .main -->
+
+
+
+
+
+<%- include("../userLayouts/userFooter.ejs")  %>
