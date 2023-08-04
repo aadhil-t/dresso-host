@@ -129,12 +129,12 @@ const insertuser = async(req,res)=>{
             const transporter = nodeMailer.createTransport({
                 service: "gmail",
                 auth: {
-                  user:process.env.Mymail,
+                  user:process.env.mymail,
                   pass:process.env.googlepass,
                 },
               });
               const mailOptions = {
-                from:process.env.Mymail,
+                from:process.env.mymail,
                 to: email,
                 subject: "verification Email",
                 html: `<p>Hi ${name}, please click <a href="http://localhost:3001/otp">here</a> to verify and enter your verification email.This${otp}</p> `,

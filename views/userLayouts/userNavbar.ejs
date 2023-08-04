@@ -49,19 +49,36 @@
 
 
                   <!-- WISHLIST BUTTON -->
+                  <% if (session == null) { %>
+                    <a onclick="plzlogin()" class="wishlist-link">
+                        <i class="icon-heart-o"></i>
+                        <span class="wishlist-txt">My Wishlist</span>
+                    </a>
+                    <% }else{  %>
+                   
                 <a href="/wishlist" class="wishlist-link">
                     <i class="icon-heart-o"></i>
                     <span class="wishlist-txt">My Wishlist</span>
                 </a>
+                <% } %>
+                
 
 
                 <!-- CART BUTTON -->
+                <% if(session == null){ %>
+                    <div class="dropdown cart-dropdown">
+                     <a onclick="plzlogin()" class="dropdown-toggle">
+                        <i class="icon-shopping-cart"></i>
+                        <span class="cart-txt"></span>
+                    </a>
+                 <%}else{%>
+
                 <div class="dropdown cart-dropdown">
                     <a href="/cartPage" class="dropdown-toggle" >
                         <i class="icon-shopping-cart"></i>
                         <span class="cart-txt"></span>
                     </a>
-
+                    <% } %>
                    
                     </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->
@@ -98,3 +115,22 @@
         </div><!-- End .container -->
     </div><!-- End .header-bottom -->
 </header><!-- End .header -->
+
+
+<script>
+    function plzlogin() {
+        $.ajax({
+            success: (response) => {
+                swal.fire({
+                    position: 'top',
+                    title: '! Please Login To Your Account',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    customClass: {
+                        popup: 'my-swal-class',
+                    },
+                });
+            }
+        });
+    }
+</script>

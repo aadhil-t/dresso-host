@@ -27,7 +27,7 @@ const loadCheckout = async(req,res)=>{
         const Total = total.length > 0 ? total[0].total : 0; 
         
         
-        res.render("userCheckout",{session,Total,userData,user,address:addressData,coupons:coupenData})        
+        res.render("userCheckout",{session,Total,userData,user,address:addressData,coupons:coupenData,})        
           }
         }
       } 
