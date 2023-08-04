@@ -148,7 +148,7 @@ const loadDashboard = async (req, res) => {
       const totalOrders = await Order.find();
       const totalProducts = await Product.find();
   
-      res.render("dashBoard", {
+      res.render("dashboard", {
         admin: adminData,
         users: userData,
         total,
