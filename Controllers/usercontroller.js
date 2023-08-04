@@ -91,6 +91,12 @@ const securePassword = async(password)=>{
 const insertuser = async(req,res)=>{
     try {
         
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      res.render("registration", {
+        message: "email already exists",
+      });
+    }
         // ----- password security-----//
         const spassword = await securePassword(req.body.password);
 
@@ -341,7 +347,7 @@ const resubmitPassword = async (req, res,next) => {
             wishlist:checkWishlist,
         })
     } catch (error) {
-        console.log(error.message);
+        next(error)
     }
   }
 

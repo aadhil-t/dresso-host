@@ -1,50 +1,44 @@
-
 <%- include('../userLayouts/userHeader.ejs')  %>
 <%- include('../userLayouts/userNavbar.ejs') %>
-
- 
 
 <section class="checkout_area section_gap">
     <div class="container">
         <div class="billing_details" >
             <div class="row">
                 <div class="col-lg-12" >
-                    <h3 class="pt-5
-                    ">Edit Address</h3>
-                    <form class="row contact_form"  action=""
-                        method="post">
+                    <h3 class="pt-5">Edit Address</h3>
+                    <form class="row contact_form" action="" method="post"  onsubmit="return validateForm()">
                         <div class="col-md-12 form-group">
                             <label>UserName</label><br>
-                            <input type="text" class="" value="<%= address.userName %>" name="username"
-                                required>
+                            <input type="text" class="" id="username" value="<%= address.userName %>" name="username" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Mobile</label><br>
-                            <input type="text" value="<%= address.mobile%>" name="mobile" required>
+                            <input type="text"  id="mobile" value="<%= address.mobile%>" name="mobile" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>AlternativeMob</label><br>
-                            <input type="text" value="<%= address.alternativeMob %>" name="alternativeMob" required>
+                            <input type="text"  id="alternativeMob" value="<%= address.alternativeMob %>" name="alternativeMob" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Housename</label><br>
-                            <input type="text" value="<%= address.housename %>" name="housename" required>
+                            <input type="text"  id="housename" value="<%= address.housename %>" name="housename" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>City</label><br>
-                            <input type="text" value="<%= address.city %>" name="city" required>
+                            <input type="text"  id="city" value="<%= address.city %>" name="city" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>State</label><br>
-                            <input type="text" value="<%= address.state %>" name="state" required>
+                            <input type="text"  id="state" value="<%= address.state %>" name="state" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Pincode</label><br>
-                            <input type="text" value="<%= address.pincode %>" name="pincode" required>
+                            <input type="text"  id="pincode" value="<%= address.pincode %>" name="pincode" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label>landmark</label><br>
-                            <input type="text" value="<%= address.landmark %>" name="landmark" required>
+                            <input type="text"  id="landmark" value="<%= address.landmark %>" name="landmark" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -56,6 +50,28 @@
     </div>
 </section>
 
-
-
 <%- include("../userLayouts/userFooter.ejs") %>
+
+<script>
+    function validateForm() {
+        const userName = document.getElementsByName("username")[0].value;
+        const mobile = document.getElementsByName("mobile")[0].value;
+        const alternativeMob = document.getElementsByName("alternativeMob")[0].value;
+        const housename = document.getElementsByName("housename")[0].value;
+        const city = document.getElementsByName("city")[0].value;
+        const state = document.getElementsByName("state")[0].value;
+        const pincode = document.getElementsByName("pincode")[0].value;
+        const landmark = document.getElementsByName("landmark")[0].value;
+
+        // Basic validation example: check if the fields are not empty
+        if (userName.trim() === '' || mobile.trim() === '' || housename.trim() === '' || city.trim() === '' || state.trim() === '' || pincode.trim() === '' || landmark.trim() === '') {
+            alert("Please fill in all the required fields.");
+            return false;
+        }
+
+        // You can add more specific validation rules here based on your requirements.
+        // For example, you can check if the mobile number follows a specific format, etc.
+
+        return true; // Allow form submission if validation passes
+    }
+</script>

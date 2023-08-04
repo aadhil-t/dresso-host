@@ -10,21 +10,25 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <h3 class="pt-5
-                            ">Edit Address</h3>
-                            <form class="row contact_form" action=""
-                                method="post">
+                            ">Add Address</h3>
+                            <form class="row contact_form"  action=""
+                                method="post" id="form">
                                 <div class="col-md-12 form-group">
                                     <label>UserName</label><br>
-                                    <input type="text" class="" value="" name="username"
+                                    <input type="text" class="" id="username" value="" name="username"
                                         required>
+                                   <span class="text-danger" id="usernameError"></span>
+
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>Mobile</label><br>
-                                    <input type="text" value="" name="mobile" required>
+                                    <input type="text" id="mobile" value="" name="mobile" required>
+                                    <span class="text-danger" id="mobileError"></span>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>AlternativeMob</label><br>
-                                    <input type="text" value="" name="alternativeMob" required>
+                                    <input type="text" id="alternativeMob" value="" name="alternativeMob" required>
+                                    <span class="text-danger" id="alternativeMobError"></span>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>Housename</label><br>
@@ -56,6 +60,74 @@
             </div>
         </section>
 
+       
+<script>
+    const Form = document.getElementById("form");
+    const usernameInput = document.getElementById('username')
+    const mobileInput = document.getElementById("mobile");
+    const alternativeMobInput = document.getElementById('alternativeMob');
+    const housenameInput = document.getElementById('housename');
+    const cityInput = document.getElementById('city');
+    const pincodeInput = document.getElementById('pincode');
+    const landmarkInput = document.getElementById('landmark');
+    
+    const productNameError = document.getElementById("productName-error");
+    const stockQuantityError = document.getElementById("stockQuantity-error");
+    const priceError = document.getElementById("price-error");
+    const descriptionError = document.getElementById("descriptionerror");
+    const imageError = document.getElementById("image-error");
+    
+            
+            
+            Form.addEventListener("submit", (event) => {
+                alert("jhg")
+              event.preventDefault();
+            
+              const usernameValue =usernameInput.value.trim();
+              if (!usernameValue) {
+                usernameError.textContent = "Please enter a username name";
+                return;
+              } else {
+                usernameError.textContent = "";
+              }
+            
+                
+              const mobileValue = mobileInput.value.trim();
+              if (!mobileValue) {
+                mobileError.textContent = "Please enter a Mobile Number";
+                return;
+              } else if (isNaN(mobileValue) || Number(mobileValue) <= 0) {
+                mobileError.textContent = "Please enter a number for Mobile Number ";
+                return;
+              } else {
+                mobileError.textContent = "";
+              }
 
+              const alternativeMobValue = alternativeMobInput.value.trim();
+              if (!alternativeMobValue) {
+                alternativeMobError.textContent = "Please enter a alternative Mobile Number";
+                return;
+              } else if (isNaN(alternativeMobValue) || Number(alternativeMobValue) <= 0) {
+                alternativeMobError.textContent = "Please enter a positive number for alternative Mobile Number ";
+                return;
+              } else {
+                alternativeMobError.textContent = "";
+              }
+              
+            
+              const descriptionValue = descriptionInput.value.trim();
+              if (!descriptionValue) {
+                descriptionError.textContent = "Please enter a description";
+                return;
+              } else {
+                descriptionError.textContent = "";
+              }
+            
+              
+              form.submit();
+            });
+            </script>
+  
+          
         <%- include("../userLayouts/userFooter.ejs") %>
 
