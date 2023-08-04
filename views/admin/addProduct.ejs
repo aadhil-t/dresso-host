@@ -13,11 +13,13 @@
           <a href="/admin/ProductList" ><button>CANCEL</button></a>
         <table class="table table-dark">  
         <br>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data" id="form">
             <br><div class="form-group">
               <label for="exampleInputUsername1">productName</label>
-              <input type="text" name="productName" class="form-control"
+              <input type="text" name="productName" id="productName" class="form-control"
                   id="exampleInputUsername1" required>
+                  <span class="text-danger" id="productName-error"></span>
+
           </div>
 
       <!--------------BRAND SECTION--------------->
@@ -51,26 +53,33 @@
         
           <input class="bt"
               style="height: 28px; width: 228px; background-color: gray;color: white;"
-              accept="image/*" type="file" name="image" multiple>
+              accept="image/*" type="file" id="formFileMultiple" name="image" multiple required>
+              <span class="text-danger" id="image-error"></span>
+
       </div>
 
       <!--------------STOCK SECTION--------------->
             <div class="form-group">
               <label for="stock">Stock</label>
-              <input type="number" name="stock" class="form-control" id="stock" required>
+              <input type="number" id="stockQuantity" name="stock" class="form-control" required>
+              <span class="text-danger" id="stockQuantity-error"></span>
+
             </div>
 
      <!--------------PRICE SECTION---------------> 
             <div class="form-group">
               <label for="price">Price</label>
-              <input type="number" name="price" class="form-control" id="price" required>
+              <input type="number" id="price" name="price" class="form-control" required>
+              <span class="text-danger" id="price-error"></span>
+
             </div>
 
 
     <!--------------DESCRIPTION SECTION---------------> 
             <div class="form-group">
               <label for="price">Discription</label>
-              <input type="text" name="discription" class="form-control" required>
+              <input type="text" name="discription" class="form-control" id="description" required>
+              <span class="text-danger" id="descriptionerror"></span>
             </div>
 
      <!--------------BUTTON SECTION---------------> 
@@ -83,4 +92,67 @@
     </div>
   </div>
   
+
+  <script>
+    const Form = document.getElementById("form");
+    const formImage = document.getElementById('formImage')
+    const productNameInput = document.getElementById("productName");
+    const stockQuantityInput = document.getElementById('stockQuantity');
+    const priceInput = document.getElementById('price');
+    const descriptionInput = document.getElementById('description');
+    const imageInput = document.getElementById('formFileMultiple');
+    
+    const productNameError = document.getElementById("productName-error");
+    const stockQuantityError = document.getElementById("stockQuantity-error");
+    const priceError = document.getElementById("price-error");
+    const descriptionError = document.getElementById("descriptionerror");
+    const imageError = document.getElementById("image-error");
+    
+            
+            
+            Form.addEventListener("submit", (event) => {
+              event.preventDefault();
+            
+              const productNameValue = productNameInput.value.trim();
+              if (!productNameValue) {
+                productNameError.textContent = "Please enter a product name";
+                return;
+              } else {
+                productNameError.textContent = "";
+              }
+            
+              const stockQuantityValue = stockQuantityInput.value.trim();
+              if (!stockQuantityValue) {
+                stockQuantityError.textContent = "Please enter a stock quantity";
+                return;
+              } else if (isNaN(stockQuantityValue) || Number(stockQuantityValue) < 0 || Number(stockQuantityValue) % 1 !== 0) {
+                stockQuantityError.textContent = "Please enter a positive number for stock quantity";
+                return; 
+              } else {
+                stockQuantityError.textContent = "";
+              }
+            
+              const priceValue = priceInput.value.trim();
+              if (!priceValue) {
+                priceError.textContent = "Please enter a price";
+                return;
+              } else if (isNaN(priceValue) || Number(priceValue) <= 0) {
+                priceError.textContent = "Please enter a positive number for price";
+                return;
+              } else {
+                priceError.textContent = "";
+              }
+            
+              const descriptionValue = descriptionInput.value.trim();
+              if (!descriptionValue) {
+                descriptionError.textContent = "Please enter a description";
+                return;
+              } else {
+                descriptionError.textContent = "";
+              }
+            
+              
+              form.submit();
+            });
+            </script>
 <%- include("../adminLayouts/adminFooter.ejs")  %>

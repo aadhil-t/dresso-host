@@ -41,6 +41,20 @@ const editBanner = async(req,res)=>{
         const id = req.body.id
         const heading = req.body.heading
         let image = req.body.image
+
+        const adminData = await User.find({ is_admin:1})
+        const banners = await Banner.find()
+
+        if(heading.trim() == ''){    
+        res.render('bannerPage',{admin:adminData,banners,message:'invalid banner text'})
+        return
+        }
+
+        const allowedExtensions = /\.(jpg|jpeg|png|gif|webp)$/i;
+        if (!allowedExtensions.test(image)) {
+            res.render('bannerPage',{admin:adminData,banners,message:'invalid type image'})
+            return
+        }
     
         if(req.file){
           image = req.file.filename

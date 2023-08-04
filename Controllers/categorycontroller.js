@@ -19,23 +19,25 @@ const loadCategory = async(req,res)=>{
 const insertCategory = async(req,res)=>{
     try {
         const name = upperCase.upperCase(req.body.name)
+        const categoryDatas = await Category.find({is_delete:false})
+        
         if(name.trim().length == 0){
-            message = "category can't be blank"
-            res.redirect("/admin/categoryList")
+            res.render('categoryList',{category:categoryDatas,message:"invalid category"})
             return;
         }
         
         const existingCategory = await Category.findOne({categoryName:name});
-        const reupdate = await Category.updateOne(
+       
+        console.log(existingCategory);
+        if (existingCategory) {
+            res.render('categoryList',{category:categoryDatas,message:"category allready existing"})
+            return;
+          }
+
+          const reupdate = await Category.updateOne(
             {categoryName: name},
             {$set: { is_delete:false }}
         );
-        console.log(existingCategory);
-        if (existingCategory) {
-            message = "category already exists";
-            res.redirect("/admin/categoryList");
-            return;
-          }
 
         //------- ADDING NEW CATEGORY --------//
         const category = new Category({
@@ -45,11 +47,11 @@ const insertCategory = async(req,res)=>{
         const categoryData = await category.save();
 
         if(categoryData){
-            message:"category is added"
+            
             res.redirect("/admin/categoryList")
         }
         else{
-            message:"Something went wrong!!"
+           
             res.redirect('/admin/categoryList')
         }
     } catch (error) {
@@ -75,11 +77,11 @@ const deleteCategory = async(req,res)=>{
   //------- EDIT CATEGORY --------//
 const updateCategory = async(req,res)=>{
     try {
-        
+
+        const categoryDatas = await Category.find({is_delete:false})
         const name = upperCase.upperCase(req.body.name)
         if(name.trim().length == 0){
-            message = "category can't be blank"
-            res.redirect("/admin/categoryList")
+            res.render('categoryList',{category:categoryDatas,message:"category can't be blank"})
             return;
         }
         
@@ -89,9 +91,7 @@ const updateCategory = async(req,res)=>{
             {$set: { is_delete:false }}
         );
         if (existingCategory) {
-            message = "category already exists";
-            res.redirect("/admin/categoryList");
-            return;
+            res.render('categoryList',{category:categoryDatas,message:"category already exist"})
           }
 
       const catName = req.body.name
@@ -101,7 +101,7 @@ const updateCategory = async(req,res)=>{
       if(updateCat){
         res.redirect('/admin/categoryList')
       }else{
-        res.redirect('/admin/categoryList')
+        res.render('categoryList',{category:categoryDatas,message:"something wrong"})
       }
     } catch (error) {
         console.log(error.message);

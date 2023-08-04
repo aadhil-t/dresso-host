@@ -32,22 +32,27 @@
           
         </div>
         <div class="modal-body">
-            <form action="/admin/addCoupon" method="post"  class="forms-sample">
+            <form action="/admin/addCoupon" method="post"  class="forms-sample" id="form">
                 <div class="form-group">
                   <label for="exampleInputUsername1">Coupon Name</label>
-                  <input type="text" class="form-control"  placeholder="Coupon Name" name="couponName">
+                  <input type="text" class="form-control"  placeholder="Coupon Name" name="couponName" id="couponName">
+                  <span class="text-danger" id="couponNameError"></span>
+
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Coupon Code</label>
-                  <input type="number" class="form-control"  placeholder="Coupon Code" name="couponCode">
+                  <input type="number" class="form-control"  placeholder="Coupon Code" name="couponCode" id="couponCode">
+                  <span class="text-danger" id="couponCode-error"></span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Discount Percentage</label>
-                  <input type="number" class="form-control"  placeholder="Discount Percentage" name="discountPercentage">
+                  <input type="number" class="form-control"  placeholder="Discount Percentage" name="discountPercentage" id="discountPercentage">
+                  <span class="text-danger" id="discountPercentage-error"></span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Criteria</label>
-                  <input type="number" class="form-control"  placeholder="Criteria" name="criteria">
+                  <input type="number" class="form-control"  placeholder="Criteria" name="criteria" id="criteria">
+                  <span class="text-danger" id="criteriaerror"></span>
                 </div>
                 
 
@@ -232,86 +237,89 @@ Swal.fire({
 
 
 
-  // const Form = document.getElementById("form");
-  // const couponNameInput = document.getElementById("couponName");
-  // const couponCodeInput = document.getElementById('couponCode');
-  // const discountPercentageInput = document.getElementById('discountPercentage');
-  // const criteriaInput = document.getElementById('criteria');
+  const Form = document.getElementById("form");
+  const couponNameInput = document.getElementById("couponName");
+  const couponCodeInput = document.getElementById('couponCode');
+  const discountPercentageInput = document.getElementById('discountPercentage');
+  const criteriaInput = document.getElementById('criteria');
   
   
-  // const couponNameError = document.getElementById("couponNameError");
-  // const couponCodeError = document.getElementById("couponCode-error");
-  // const discountPercentageError = document.getElementById("discountPercentage-error");
-  // const criteriaError = document.getElementById("criteriaerror");
+  const couponNameError = document.getElementById("couponNameError");
+  const couponCodeError = document.getElementById("couponCode-error");
+  const discountPercentageError = document.getElementById("discountPercentage-error");
+  const criteriaError = document.getElementById("criteriaerror");
   
           
           
-  //         Form.addEventListener("submit", (event) => {
+          Form.addEventListener("submit", (event) => {
             
-  //           event.preventDefault();
-  //           const couponNameValue = couponNameInput.value.trim();
-  //           if (!couponNameValue) {
-  //             couponNameError.textContent = "Please enter a Coupon name";
-  //             return;
-  //           } else {
-  //             couponNameError.textContent = "";
-  //           }
+            event.preventDefault();
+            const couponNameValue = couponNameInput.value.trim();
+            if (!couponNameValue) {
+              couponNameError.textContent = "Please enter a Coupon name";
+              return;
+            } else {
+              couponNameError.textContent = "";
+            }
           
-  //           // const stockQuantityValue = stockQuantityInput.value.trim();
-  //           // if (!stockQuantityValue) {
-  //           //   stockQuantityError.textContent = "Please enter a stock quantity";
-  //           //   return;
-  //           // } else if (isNaN(stockQuantityValue) || Number(stockQuantityValue) < 0 || Number(stockQuantityValue) % 1 !== 0) {
-  //           //   stockQuantityError.textContent = "Please enter a positive number for stock quantity";
-  //           //   return; 
-  //           // } else {
-  //           //   stockQuantityError.textContent = "";
-  //           // }
+            // const stockQuantityValue = stockQuantityInput.value.trim();
+            // if (!stockQuantityValue) {
+            //   stockQuantityError.textContent = "Please enter a stock quantity";
+            //   return;
+            // } else if (isNaN(stockQuantityValue) || Number(stockQuantityValue) < 0 || Number(stockQuantityValue) % 1 !== 0) {
+            //   stockQuantityError.textContent = "Please enter a positive number for stock quantity";
+            //   return; 
+            // } else {
+            //   stockQuantityError.textContent = "";
+            // }
           
-  //           const couponCodeValue = couponCodeInput.value.trim();
-  //           if (!couponCodeValue) {
-  //             couponCodeError.textContent = "Please enter a Code";
-  //             return;
-  //           } else if (isNaN(couponCodeValue) || Number(couponCodeValue) <= 0) {
-  //             couponCodeError.textContent = "Please enter a positive number for Coupon Code";
-  //             return;
-  //           } else {
-  //             couponCodeError.textContent = "";
-  //           }
+            const couponCodeValue = couponCodeInput.value.trim();
+            if (!couponCodeValue) {
+              couponCodeError.textContent = "Please enter a Code";
+              return;
+            } else if (isNaN(couponCodeValue) || Number(couponCodeValue) <= 0) {
+              couponCodeError.textContent = "Please enter a positive number for Coupon Code";
+              return;
+            } else {
+              couponCodeError.textContent = "";
+            }
 
-  //           const discountPercentageValue = discountPercentageInput.value.trim();
-  //           if (!discountPercentageValue) {
-  //             discountPercentageError.textContent = "Please enter a Discount percentage";
-  //             return;
-  //           } else if (isNaN(discountPercentageValue) || Number(discountPercentageValue) <= 0) {
-  //             discountPercentageError.textContent = "Please enter a positive number for Discount Percentage";
-  //             return;
-  //           } else {
-  //             discountPercentageError.textContent = "";
-  //           }
+            const discountPercentageValue = discountPercentageInput.value.trim();
+            if (!discountPercentageValue) {
+              discountPercentageError.textContent = "Please enter a Discount percentage";
+              return;
+            } else if (isNaN(discountPercentageValue) || Number(discountPercentageValue) <= 0) {
+              discountPercentageError.textContent = "Please enter a positive number for Discount Percentage";
+              return;
+            }  else if (Number(discountPercentageValue) >= 80) {
+              discountPercentageError.textContent = "Please enter below 80!!";
+              return;
+            } else {
+              discountPercentageError.textContent = "";
+            }
 
-  //           const criteriaValue = criteriaInput.value.trim();
-  //           if (!criteriaValue) {
-  //             criteriaError.textContent = "Please enter a Criteria";
-  //             return;
-  //           } else if (isNaN(criteriaValue) || Number(criteriaValue) <= 0) {
-  //             criteriaError.textContent = "Please enter a positive number for Criteria";
-  //             return;
-  //           } else {
-  //             criteriaError.textContent = "";
-  //           }
+            const criteriaValue = criteriaInput.value.trim();
+            if (!criteriaValue) {
+              criteriaError.textContent = "Please enter a Criteria";
+              return;
+            } else if (isNaN(criteriaValue) || Number(criteriaValue) <= 0) {
+              criteriaError.textContent = "Please enter a positive number for Criteria";
+              return;
+            } else {
+              criteriaError.textContent = "";
+            }
           
-  //           // const descriptionValue = descriptionInput.value.trim();
-  //           // if (!descriptionValue) {
-  //           //   descriptionError.textContent = "Please enter a description";
-  //           //   return;
-  //           // } else {
-  //           //   descriptionError.textContent = "";
-  //           // }
+            // const descriptionValue = descriptionInput.value.trim();
+            // if (!descriptionValue) {
+            //   descriptionError.textContent = "Please enter a description";
+            //   return;
+            // } else {
+            //   descriptionError.textContent = "";
+            // }
           
             
-  //           Form.submit();
-  //         });
+            Form.submit();
+          });
 
         </script>
 

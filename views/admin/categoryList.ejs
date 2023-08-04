@@ -15,9 +15,14 @@
           <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal"
           data-bs-whatever="@mdo">Add Category</button>   
           <br>
+        
           <table class="table table">
 
-           
+            <% if(typeof message !== 'undefined' ){ %>
+              <span class="text-danger text-center" role="alert">
+                <%= message %>
+              </span>
+            <% } %>
             <thead>
               <tr>
                 <th> No </th>

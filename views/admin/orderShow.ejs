@@ -22,7 +22,6 @@
                   <th>Payment Method</th>
                   <th>Total Amt</th>
                   <th>Date</th>
-                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -39,7 +38,6 @@
                       <td><%= order.paymentMethod%></td>
                       <td><%= order.totalAmount%></td>
                       <td><%= order.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).replace(/\//g, '-') %></td>
-                      <td><%= order.status%></td>
                       <td><a href="singleorder/<%= order._id %>"><button class="btn btn-outline-info" href=""><i class="mdi mdi-file-check btn-icon-prepend"></i>View</button></a></td>
                     </tr>
                  
