@@ -7,38 +7,54 @@
             <div class="row">
                 <div class="col-lg-12" >
                     <h3 class="pt-5">Edit Address</h3>
-                    <form class="row contact_form" action="" method="post"  onsubmit="return validateForm()">
+                    <form class="row contact_form" action="" method="post" id="form" >
                         <div class="col-md-12 form-group">
                             <label>UserName</label><br>
                             <input type="text" class="" id="username" value="<%= address.userName %>" name="username" required>
+                            <span class="text-danger" id="usernameError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Mobile</label><br>
                             <input type="text"  id="mobile" value="<%= address.mobile%>" name="mobile" required>
+                            <span class="text-danger" id="mobileError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>AlternativeMob</label><br>
                             <input type="text"  id="alternativeMob" value="<%= address.alternativeMob %>" name="alternativeMob" required>
+                            <span class="text-danger" id="alternativeMobError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Housename</label><br>
                             <input type="text"  id="housename" value="<%= address.housename %>" name="housename" required>
+                            <span class="text-danger" id="housenameError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>City</label><br>
                             <input type="text"  id="city" value="<%= address.city %>" name="city" required>
+                            <span class="text-danger" id="cityError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>State</label><br>
                             <input type="text"  id="state" value="<%= address.state %>" name="state" required>
+                            <span class="text-danger" id="stateError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>Pincode</label><br>
                             <input type="text"  id="pincode" value="<%= address.pincode %>" name="pincode" required>
+                            <span class="text-danger" id="pincodeError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <label>landmark</label><br>
                             <input type="text"  id="landmark" value="<%= address.landmark %>" name="landmark" required>
+                            <span class="text-danger" id="landmarkError"></span>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,29 +65,108 @@
         </div>
     </div>
 </section>
+      
+<script>
+    const Form = document.getElementById("form");
+    const usernameInput = document.getElementById('username')
+    const mobileInput = document.getElementById("mobile");
+    const alternativeMobInput = document.getElementById('alternativeMob');
+    const housenameInput = document.getElementById('housename');
+    const cityInput = document.getElementById('city');
+    const stateInput = document.getElementById('state');
+    const pincodeInput = document.getElementById('pincode');
+    const landmarkInput = document.getElementById('landmark');
+    
+    const productNameError = document.getElementById("productName-error");
+    const stockQuantityError = document.getElementById("stockQuantity-error");
+    const priceError = document.getElementById("price-error");
+    const descriptionError = document.getElementById("descriptionerror");
+    const imageError = document.getElementById("image-error");
+    
+            
+            
+            Form.addEventListener("submit", (event) => {
+              event.preventDefault();
+            
+              const usernameValue =usernameInput.value.trim();
+              if (!usernameValue) {
+                usernameError.textContent = "Please enter a username name";
+                return;
+              } else {
+                usernameError.textContent = "";
+              }
+            
+                
+              const mobileValue = mobileInput.value.trim();
+              if (!mobileValue) {
+                mobileError.textContent = "Please enter a Mobile Number";
+                return;
+              } else if (isNaN(mobileValue) || Number(mobileValue) <= 0) {
+                mobileError.textContent = "Please enter a number for Mobile Number ";
+                return;
+              } else {
+                mobileError.textContent = "";
+              }
+
+              const alternativeMobValue = alternativeMobInput.value.trim();
+              if (!alternativeMobValue) {
+                alternativeMobError.textContent = "Please enter a alternative Mobile Number";
+                return;
+              } else if (isNaN(alternativeMobValue) || Number(alternativeMobValue) <= 0) {
+                alternativeMobError.textContent = "Please enter a positive number for alternative Mobile Number ";
+                return;
+              } else {
+                alternativeMobError.textContent = "";
+              }
+              
+            
+              const housenameValue = housenameInput.value.trim();
+              if (!housenameValue) {
+                housenameError.textContent = "Please enter a housename";
+                return;
+              } else {
+                housenameError.textContent = "";
+              }
+            
+              const cityValue = cityInput.value.trim();
+              if (!cityValue) {
+                cityError.textContent = "Please enter a city";
+                return;
+              } else {
+                cityError.textContent = "";
+              }
+            
+              const stateValue = stateInput.value.trim();
+              if (!stateValue) {
+                stateError.textContent = "Please enter a state";
+                return;
+              } else {
+                stateError.textContent = "";
+              }
+            
+              
+              const pincodeValue = pincodeInput.value.trim();
+              if (!pincodeValue) {
+                pincodError.textContent = "Please enter a pincode";
+                return;
+              } else if (isNaN(pincodeValue) || Number(pincodeValue) <= 0) {
+                pincodeError.textContent = "Please enter a number for pincode ";
+                return;
+              } else {
+                pincodeError.textContent = "";
+              }
+              
+              
+              const landmarkValue = landmarkInput.value.trim();
+              if (!landmarkValue) {
+                landmarkError.textContent = "Please enter a landmark";
+                return;
+              } else {
+                landmarkError.textContent = "";
+              }
+              
+              form.submit();
+            });
+            </script>
 
 <%- include("../userLayouts/userFooter.ejs") %>
-
-<script>
-    function validateForm() {
-        const userName = document.getElementsByName("username")[0].value;
-        const mobile = document.getElementsByName("mobile")[0].value;
-        const alternativeMob = document.getElementsByName("alternativeMob")[0].value;
-        const housename = document.getElementsByName("housename")[0].value;
-        const city = document.getElementsByName("city")[0].value;
-        const state = document.getElementsByName("state")[0].value;
-        const pincode = document.getElementsByName("pincode")[0].value;
-        const landmark = document.getElementsByName("landmark")[0].value;
-
-        // Basic validation example: check if the fields are not empty
-        if (userName.trim() === '' || mobile.trim() === '' || housename.trim() === '' || city.trim() === '' || state.trim() === '' || pincode.trim() === '' || landmark.trim() === '') {
-            alert("Please fill in all the required fields.");
-            return false;
-        }
-
-        // You can add more specific validation rules here based on your requirements.
-        // For example, you can check if the mobile number follows a specific format, etc.
-
-        return true; // Allow form submission if validation passes
-    }
-</script>

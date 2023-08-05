@@ -32,23 +32,32 @@
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>Housename</label><br>
-                                    <input type="text" value="" name="housename" required>
+                                    <input type="text" value="" id="housename" name="housename" required>
+                                    <span class="text-danger" id="housenameError"></span>
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>City</label><br>
-                                    <input type="text" value="" name="city" required>
+                                    <input type="text" value="" id="city" name="city" required>
+                                    <span class="text-danger" id="cityError"></span>
+
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>State</label><br>
-                                    <input type="text" value="" name="state" required>
+                                    <input type="text" value="" id="state" name="state" required>
+                                    <span class="text-danger" id="stateError"></span>
+
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>Pincode</label><br>
-                                    <input type="text" value="" name="pincode" required>
+                                    <input type="text" value="" id="pincode" name="pincode" required>
+                                    <span class="text-danger" id="pincodeError"></span>
+                                    
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label>landmark</label><br>
-                                    <input type="text" value="" name="landmark" required>
+                                    <input type="text" value="" id="landmark" name="landmark" required>
+                                    <span class="text-danger" id="landmarkError"></span>
+
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -68,6 +77,7 @@
     const alternativeMobInput = document.getElementById('alternativeMob');
     const housenameInput = document.getElementById('housename');
     const cityInput = document.getElementById('city');
+    const stateInput = document.getElementById('state');
     const pincodeInput = document.getElementById('pincode');
     const landmarkInput = document.getElementById('landmark');
     
@@ -80,7 +90,6 @@
             
             
             Form.addEventListener("submit", (event) => {
-                alert("jhg")
               event.preventDefault();
             
               const usernameValue =usernameInput.value.trim();
@@ -115,14 +124,50 @@
               }
               
             
-              const descriptionValue = descriptionInput.value.trim();
-              if (!descriptionValue) {
-                descriptionError.textContent = "Please enter a description";
+              const housenameValue = housenameInput.value.trim();
+              if (!housenameValue) {
+                housenameError.textContent = "Please enter a housename";
                 return;
               } else {
-                descriptionError.textContent = "";
+                housenameError.textContent = "";
               }
             
+              const cityValue = cityInput.value.trim();
+              if (!cityValue) {
+                cityError.textContent = "Please enter a city";
+                return;
+              } else {
+                cityError.textContent = "";
+              }
+            
+              const stateValue = stateInput.value.trim();
+              if (!stateValue) {
+                stateError.textContent = "Please enter a state";
+                return;
+              } else {
+                stateError.textContent = "";
+              }
+            
+              
+              const pincodeValue = pincodeInput.value.trim();
+              if (!pincodeValue) {
+                pincoderror.textContent = "Please enter a pincode";
+                return;
+              } else if (isNaN(pincodeValue) || Number(pincodeValue) <= 0) {
+                pincodeError.textContent = "Please enter a number for pincode ";
+                return;
+              } else {
+                pincodeError.textContent = "";
+              }
+              
+              
+              const landmarkValue = landmarkInput.value.trim();
+              if (!landmarkValue) {
+                landmarkError.textContent = "Please enter a landmark";
+                return;
+              } else {
+                landmarkError.textContent = "";
+              }
               
               form.submit();
             });
