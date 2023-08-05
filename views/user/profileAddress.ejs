@@ -47,9 +47,9 @@
                                         Address</a>
                                   </div>
 
-                                  <% if(address){
+                                  <% if(address.length > 0){
 
-                                    address.addresses.forEach((address)=>{
+                                    address.forEach((address)=>{
                                         %>
 
                                         <div class="card card-dashboard">

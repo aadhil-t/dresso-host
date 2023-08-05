@@ -20,7 +20,14 @@ const loadprofileAddress = async(req,res)=>{
     try {
         const session = req.session.user_id;
         const userData = await User.findById({_id: session});
-         res.render('addUserAddress',{user:userData, session})
+        const addressDetails = await Address.findOne({userid: req.session.user_id})
+
+        if(addressDetails){
+            res.render('addUserAddress',{user:userData, session ,address:addressDetails})
+        }else{
+            res.render('addUserAddress',{user:userData, session,address:[]})
+
+        }
     } catch (error) {
         console.log(error.message);
     }
@@ -245,7 +252,11 @@ const deleteAddress = async(req,res)=>{
         if(session){
             if(addressData){
                 const address = addressData.addresses
-                res.render('profileAddress',{session,user:userData,address:addressData})
+                console.log(address.length);
+                res.render('profileAddress',{session,user:userData,address:address})
+            }else{
+                res.render('profileAddress',{session,user:userData,address:[]})
+
             }
         }
     } catch (error) {
