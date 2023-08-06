@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const category = require('../models/categoryModel')
 const product = require('../models/productModel')
+const Sharp = require("sharp")
 const path = require('path')
 const fs = require('fs')
 
@@ -33,6 +34,11 @@ const insertProduct = async(req,res)=>{
         if (req.files && req.files.length > 0) {
           for (let i = 0; i < req.files.length; i++) {
             images.push(req.files[i].filename);
+            await Sharp('./public/adminAssets/adminImage/'+ req.files[i].filename)
+            .resize(800, 800)
+            .toFile(
+                "./public/adminAssets/adminImage/productImage/" + req.files[i].filename
+            );
           }
         }
         
@@ -168,6 +174,11 @@ const updateImage = async (req, res) => {
       const images = req.files.map(file => file.filename);
       if (imgLength + images.length <= 10) {
         await product.findByIdAndUpdate(id, { $addToSet: { productImage: { $each: images } } });
+        await Sharp('./public/adminAssets/adminImage/'+ images[0])
+        .resize(800, 800)
+        .toFile(
+            "./public/adminAssets/adminImage/productImage/" + images[0]
+        );
       }
     
       res.redirect(`/admin/editproduct/${id}`);
